@@ -133,10 +133,11 @@ html.lt2 .sa-title             { font-size: clamp(12px, 1.1vw, 19px); }
 /* Base: sa-item  clamp(9px,.68vw,11px)   → lift floor by 1px only   */
 html.lt2 .sa-item              { font-size: clamp(10px, .7vw, 11px); }
 html.lt2 .sa-item span:last-child {
-  font-size:    inherit;   /* inherits from .sa-item above — no double scaling */
-  min-width:    0;
+  font-size:     inherit;          /* no double scaling from parent .sa-item */
+  min-width:     0;
+  white-space:   normal;
   overflow-wrap: break-word;
-  word-break:   normal;
+  word-break:    normal;
 }
 /* Base: sa-tag   clamp(7px,.52vw,9px)    → 1px lift only            */
 html.lt2 .sa-tag               { font-size: clamp(8px, .54vw, 9px); }
@@ -303,6 +304,8 @@ html,body { width:100%; height:100%; overflow:hidden; font-family:'Saira Condens
 .wfsub { font-size:clamp(10px,.78vw,13px); color:var(--gray); margin-top:4px; }
 .wfbody { flex:1; display:flex; flex-direction:column; justify-content:flex-start; overflow-y:auto; min-height:0; gap:clamp(10px,1.3vh,18px); }
 .wfbody::-webkit-scrollbar{width:3px} .wfbody::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+/* Architecture diagram pane scrollbar — same thin style */
+#sarch > div::-webkit-scrollbar{width:3px} #sarch > div::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
 .ilbl { font-size:clamp(8px,.6vw,11px); color:var(--gray); letter-spacing:.15em; text-transform:uppercase; margin-bottom:5px; }
 .inp { background:rgba(255,255,255,.05); border:2px solid var(--border); border-radius:9px; padding:clamp(9px,1.1vh,16px) clamp(11px,1.1vw,22px); font-family:'IBM Plex Mono',monospace; font-size:clamp(14px,1.4vw,24px); color:#fff; letter-spacing:.2em; outline:none; transition:border-color .2s; max-width:420px; width:100%; }
 .inp:focus{border-color:var(--blue-l);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
@@ -521,14 +524,19 @@ html,body { width:100%; height:100%; overflow:hidden; font-family:'Saira Condens
   font-size:clamp(12px,1.1vw,18px);
   font-weight:700; color:#5590e0;
   margin-bottom:clamp(4px,.5vh,7px);
+  min-width:0;
+  white-space:normal;
+  overflow-wrap:break-word;
+  word-break:normal;
 }
-.sa-items { display:flex; flex-direction:column; gap:clamp(3px,.4vh,5px); }
+.sa-items { display:flex; flex-direction:column; gap:clamp(3px,.4vh,5px); min-width:0; }
 .sa-item {
   display:flex; align-items:flex-start; gap:7px;
   font-size:clamp(9px,.68vw,11px); color:var(--gray-l); line-height:1.5;
 }
 .sa-item > span:last-child {
   min-width:0;
+  white-space:normal;
   overflow-wrap:break-word;
   word-break:normal;
 }
@@ -903,11 +911,17 @@ html,body { width:100%; height:100%; overflow:hidden; font-family:'Saira Condens
     justify-content: flex-start;
     align-items: stretch;
   }
-  /* Diagram area: allow natural height */
+  /* Diagram area: override overflow-y:auto → visible so layers stack freely */
+  #sarch > div[style*="overflow-y:auto"] {
+    flex: none;
+    height: auto;
+    overflow: visible !important;
+  }
+  /* Fallback catch for either overflow value */
   #sarch > div[style*="flex:1"] {
     flex: none;
     height: auto;
-    overflow: visible;
+    overflow: visible !important;
   }
   .sa-layer  { flex-wrap: wrap; }
   .sa-tags   { max-width: 100%; justify-content: flex-start; margin-top: 8px; flex-wrap: wrap; }
@@ -1654,7 +1668,7 @@ html,body { width:100%; height:100%; overflow:hidden; font-family:'Saira Condens
       </div>
 
       <!-- DIAGRAM AREA: 4 layers stacked with arrows -->
-      <div style="flex:1;display:flex;flex-direction:column;gap:0;min-height:0;overflow:hidden">
+      <div style="flex:1;display:flex;flex-direction:column;gap:0;min-height:0;overflow-y:auto;overflow-x:hidden">
 
         <!-- ═══ LAYER 1: Citizen Interaction ═══ -->
         <div class="sa-layer" style="--lc:#5590e0;--lbg:rgba(18,36,70,.75);--lborder:rgba(85,144,224,.4)">
