@@ -36,6 +36,116 @@
   --blue:#1040a0; --blue-b:#1a55cc; --blue-l:#3370e0;
   --border:rgba(255,255,255,.5); --glass:rgba(255,255,255,.1);
 }
+/* ─────────────────────────────────────────────────────────────
+   LARGE TEXT MODE  ·  toggled via html.lt2
+   Strategy: set root font-size to 112% so em-based values scale,
+   then selectively lift clamp() floors on the smallest text elements.
+   Deliberately excluded: heights, padding, grid cols, border-radius,
+   container widths — layout is completely untouched.
+   ───────────────────────────────────────────────────────────── */
+html.lt2 {
+  font-size: 112%;   /* root em anchor — drives all rem/em values */
+}
+
+/* Allow slightly taller content to scroll rather than clip */
+html.lt2 .wfbody  { overflow-y: auto; }
+html.lt2 .wfside  { overflow-y: auto; }
+html.lt2 .wfmain  { overflow: hidden; } /* keep the outer shell tight */
+
+/* ── Top bar ── */
+html.lt2 .tb-name   { font-size: clamp(15px, 1.2vw, 20px); }
+html.lt2 .tb-status { font-size: clamp(10px, .65vw, 12px); }
+html.lt2 .acc       { font-size: clamp(10px, .6vw, 11px); }
+
+/* ── Welcome screen ── */
+html.lt2 .brand-tag  { font-size: clamp(12px, 1.1vw, 18px); }
+html.lt2 .thint      { font-size: clamp(10px, .7vw, 13px); }
+html.lt2 .wsi-l      { font-size: clamp(10px, .6vw, 11px); }
+html.lt2 .cic-label  { font-size: clamp(9px,  .6vw, 11px); }
+html.lt2 .cic-desc   { font-size: clamp(9px,  .6vw, 11px); }
+html.lt2 .imp-lnk    { font-size: clamp(11px, .75vw, 14px); }
+html.lt2 .pilot-lbl  { font-size: clamp(10px, .7vw, 12px); }
+
+/* ── Language screen ── */
+html.lt2 .lt-ttl { font-size: clamp(12px, .85vw, 15px); }
+html.lt2 .lc-h   { font-size: clamp(10px, .65vw, 12px); }
+
+/* ── Menu screen ── */
+html.lt2 .mhd-top { font-size: clamp(11px, .75vw, 14px); }
+html.lt2 .sc-dsc  { font-size: clamp(10px, .7vw, 13px); }
+html.lt2 .tip     { font-size: clamp(10px, .65vw, 12px); }
+
+/* ── Workflow sidebar ── */
+html.lt2 .sd-bs   { font-size: clamp(10px, .65vw, 12px); }
+html.lt2 .sdl     { font-size: clamp(9px,  .6vw, 11px); }
+html.lt2 .sdname  { font-size: clamp(12px, .9vw, 15px); }
+html.lt2 .sd-sd   { font-size: clamp(10px, .7vw, 13px); }
+html.lt2 .bbtn    { font-size: clamp(12px, .85vw, 15px); }
+
+/* ── Workflow main pane ── */
+html.lt2 .wfcnt { font-size: clamp(10px, .7vw, 12px); }
+html.lt2 .wfsub { font-size: clamp(12px, .88vw, 15px); }
+html.lt2 .ilbl  { font-size: clamp(10px, .7vw, 13px); }
+
+/* ── Form inputs ── */
+html.lt2 .inp   { font-size: clamp(16px, 1.5vw, 26px); }
+
+/* ── Bill / review details ── */
+html.lt2 .blbl  { font-size: clamp(10px, .65vw, 12px); }
+html.lt2 .bval  { font-size: clamp(14px, 1.05vw, 17px); }
+
+/* ── Payment / service option labels ── */
+html.lt2 .onm  { font-size: clamp(13px, .98vw, 17px); }
+html.lt2 .odsc { font-size: clamp(10px, .72vw, 13px); }
+
+/* ── Validation error messages ── */
+html.lt2 [id$="-err"] { font-size: clamp(11px, .78vw, 13px) !important; }
+
+/* ── Success screens ── */
+html.lt2 .smsg  { font-size: clamp(12px, .85vw, 15px); }
+html.lt2 .txnl  { font-size: clamp(10px, .7vw, 12px); }
+html.lt2 .pbtn  { font-size: clamp(12px, .85vw, 15px); }
+html.lt2 .tln   { font-size: clamp(11px, .8vw, 14px); }
+html.lt2 .tlt   { font-size: clamp(10px, .68vw, 12px); }
+
+/* ── Timeout overlay ── */
+html.lt2 .tomsg { font-size: clamp(12px, .85vw, 15px); }
+
+/* ── Tracking screen ── */
+html.lt2 .trkres [style*="font-size"] { font-size: clamp(10px, .7vw, 12px); }
+
+/* ── Impact screen ── */
+html.lt2 .bva-item > div  { font-size: clamp(11px, .8vw, 14px); }
+html.lt2 .bva-metric-lbl  { font-size: clamp(10px, .72vw, 13px); }
+
+/* ── Admin dashboard ── */
+html.lt2 .adcl   { font-size: clamp(10px, .65vw, 12px); }
+html.lt2 .ads    { font-size: clamp(10px, .7vw, 12px); }
+html.lt2 .adm    { font-size: clamp(18px, 2.6vw, 36px); } /* KPI number — keep dominant */
+html.lt2 .ana-lbl{ font-size: clamp(10px, .7vw, 12px); }
+html.lt2 .ana-val{ font-size: clamp(12px, .88vw, 15px); }
+html.lt2 .sysnm  { font-size: clamp(11px, .8vw, 14px); }
+html.lt2 .sysv   { font-size: clamp(11px, .8vw, 14px); }
+
+/* ── Architecture screen — max 5% lift to prevent layout stress ── */
+/* Base: sa-title clamp(12px,1.1vw,18px)  → cap at ~12px–13px floor  */
+html.lt2 .sa-title             { font-size: clamp(12px, 1.1vw, 19px); }
+/* Base: sa-item  clamp(9px,.68vw,11px)   → lift floor by 1px only   */
+html.lt2 .sa-item              { font-size: clamp(10px, .7vw, 11px); }
+html.lt2 .sa-item span:last-child {
+  font-size:    inherit;   /* inherits from .sa-item above — no double scaling */
+  min-width:    0;
+  overflow-wrap: break-word;
+  word-break:   normal;
+}
+/* Base: sa-tag   clamp(7px,.52vw,9px)    → 1px lift only            */
+html.lt2 .sa-tag               { font-size: clamp(8px, .54vw, 9px); }
+/* Base: sa-arrow-label clamp(7px,.52vw,9px) → 1px lift only         */
+html.lt2 .sa-arrow-label       { font-size: clamp(8px, .54vw, 9px); }
+
+/* ── Bottom bar ── */
+html.lt2 .bots { font-size: clamp(9px, .58vw, 11px); }
+
 html,body { width:100%; height:100%; overflow:hidden; font-family:'Saira Condensed',sans-serif; background:var(--navy); color:var(--white); -webkit-font-smoothing:antialiased; }
 
 /* SHELL */
@@ -417,6 +527,11 @@ html,body { width:100%; height:100%; overflow:hidden; font-family:'Saira Condens
   display:flex; align-items:flex-start; gap:7px;
   font-size:clamp(9px,.68vw,11px); color:var(--gray-l); line-height:1.5;
 }
+.sa-item > span:last-child {
+  min-width:0;
+  overflow-wrap:break-word;
+  word-break:normal;
+}
 .sa-dot {
   width:5px; height:5px; border-radius:50%;
   background:#5590e0; flex-shrink:0; margin-top:4px;
@@ -487,6 +602,371 @@ html,body { width:100%; height:100%; overflow:hidden; font-family:'Saira Condens
 .sparkline { display:flex; align-items:flex-end; gap:clamp(3px,.35vw,5px); height:clamp(32px,4.5vh,50px); margin-top:7px; }
 .spk { flex:1; border-radius:2px 2px 0 0; transition:height .5s ease; }
 .spk-lbl { font-size:clamp(6px,.45vw,8px); color:var(--gray); margin-top:3px; text-align:center; }
+
+/* ══════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE OVERRIDES  ·  max-width: 768px
+   Desktop ( > 768px ): zero changes — full kiosk behaviour intact
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ─────────────────────────────────────────────
+     1. BASE — unlock vertical scroll
+  ───────────────────────────────────────────── */
+  html, body {
+    height: auto;
+    min-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Shell grows with content */
+  #kiosk {
+    height: auto;
+    min-height: 100dvh; /* dynamic viewport on mobile browsers */
+    overflow: visible;
+  }
+
+  /* ─────────────────────────────────────────────
+     2. TOP BAR — compact, no overflow
+  ───────────────────────────────────────────── */
+  #topbar {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 48px;
+    padding: 6px 4vw;
+    gap: 4px 8px;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+  }
+  /* Hide the centre status and location text — too wide for mobile */
+  .tb-loc,
+  .tb-c   { display: none; }
+  /* Right cluster: allow wrapping, tighten gaps */
+  .tb-r   { gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+  .acc    { font-size: 9px; padding: 3px 6px; }
+  /* Prevent brand name from overflowing */
+  .tb-name { letter-spacing: 1px; }
+
+  /* ─────────────────────────────────────────────
+     3. MAIN AREA — natural height, scrollable
+  ───────────────────────────────────────────── */
+  #main {
+    position: relative;   /* was: relative already on mobile from prev rule */
+    overflow: visible;
+    height: auto;
+    /* Reserve at least viewport minus the sticky bar so first screen fills */
+    min-height: calc(100dvh - 48px);
+  }
+
+  /* ─────────────────────────────────────────────
+     4. SCREEN CONTAINERS
+     position:absolute → relative so they flow in the document.
+     display:none / display:flex still controlled by JS (.on class).
+  ───────────────────────────────────────────── */
+  .scr {
+    position: relative;
+    inset: auto;
+    height: auto;
+    min-height: calc(100dvh - 48px);
+    overflow: visible;
+    padding: 5vw 4vw;
+  }
+
+  /* ─────────────────────────────────────────────
+     5. BOTTOM BAR — flows at page end, not fixed
+  ───────────────────────────────────────────── */
+  #botbar {
+    position: relative;
+    bottom: auto;
+    z-index: 1;
+    height: auto;
+    min-height: 32px;
+    padding: 6px clamp(12px,4vw,20px);
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .bots { font-size: 8px; }
+  .botr { display: none; } /* too long for mobile */
+
+  /* ─────────────────────────────────────────────
+     6. WELCOME SCREEN — reflow absolutely-placed widgets
+  ───────────────────────────────────────────── */
+
+  /* Pilot banner: was position:absolute top:0 left:0 right:0 */
+  .pilot-banner {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 8px;
+    margin-bottom: 10px;
+    padding: 8px 4vw;
+  }
+  .pilot-lbl,
+  .pilot-txt { white-space: normal; text-align: center; }
+
+  /* Stats row: was position:absolute bottom:2vh */
+  .w-stats {
+    position: relative;
+    bottom: auto;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 16px;
+  }
+
+  /* Impact link: was position:absolute bottom:2vh right:2vw */
+  .imp-lnk {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: 12px;
+    align-self: center;
+  }
+
+  /* Citizen impact counter: was position:absolute top:... left:... */
+  .cic {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-top: 16px;
+    width: 100%;
+    max-width: 320px;
+    align-self: center;
+  }
+
+  /* Hidden admin tap-zone: pull out of flow so it doesn't block content */
+  .adm-zone {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    height: 24px;      /* visible touch area, but not huge */
+    margin-top: 8px;
+    opacity: 0;        /* invisible, still tappable */
+  }
+
+  /* Background grid on welcome screen: clip to avoid horizontal scroll */
+  .w-grid { overflow: hidden; }
+
+  /* ─────────────────────────────────────────────
+     7. LANGUAGE SCREEN
+  ───────────────────────────────────────────── */
+  .lt-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+  .lc { width: min(100%, 340px); }
+
+  /* ─────────────────────────────────────────────
+     8. MENU SCREEN
+  ───────────────────────────────────────────── */
+  #sm {
+    padding: 5vw 4vw;
+    overflow: visible;
+    height: auto;
+    min-height: calc(100dvh - 48px);
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+  /* Single column grid; rows size to content */
+  .mgrid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 9px;
+  }
+  /* Tip tooltip: was position:fixed */
+  .tip {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    max-width: 100%;
+    margin-top: 8px;
+  }
+
+  /* ─────────────────────────────────────────────
+     9. WORKFLOW SCREENS (electricity, gas, municipal, track)
+  ───────────────────────────────────────────── */
+  .wfs {
+    height: auto;
+    min-height: calc(100dvh - 48px);
+    align-items: stretch;
+  }
+  /* Stack sidebar above main content */
+  .wfl {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+  /* Sidebar: full width strip at the top */
+  .wfside {
+    width: 100%;
+    flex-shrink: 0;
+    overflow: visible;
+    padding: 14px 4vw 10px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  /* Collapse verbose step list — keep service name + back button */
+  .sd-steps { display: none; }
+  .sd-sd    { display: none; }
+  .sd-bot   { margin-top: 10px; padding-top: 0; }
+
+  /* Main content pane */
+  .wfmain {
+    overflow: visible;
+    padding: 18px 4vw 24px;
+    height: auto;
+    flex: none;
+  }
+  /* Body scrolls with the page */
+  .wfbody {
+    overflow: visible;
+    height: auto;
+    min-height: 0;
+    gap: 14px;
+    flex: none;
+  }
+
+  /* ─────────────────────────────────────────────
+     10. FORM ELEMENTS
+  ───────────────────────────────────────────── */
+  /* Full-width inputs; 16px stops iOS Safari auto-zoom */
+  .inp  { max-width: 100%; font-size: 16px; }
+  /* Numpad: fill available width */
+  .npad { max-width: 100%; }
+  /* Bill details: single column */
+  .bill { grid-template-columns: 1fr; }
+  /* Option button grids: 2-up */
+  .opts,
+  .opts3 { grid-template-columns: 1fr 1fr; }
+
+  /* ─────────────────────────────────────────────
+     11. SUCCESS / CONFIRMATION SCREENS
+  ───────────────────────────────────────────── */
+  .suc {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px 4vw 28px;
+  }
+  .svc-timeline { max-width: 100%; }
+  #se4, #sg3, #sm4 {
+    height: auto;
+    min-height: calc(100dvh - 48px);
+    padding: 5vw 4vw;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  /* ─────────────────────────────────────────────
+     12. TRACKING SCREEN
+  ───────────────────────────────────────────── */
+  #strk .wfmain { padding: 16px 4vw 24px; }
+
+  /* ─────────────────────────────────────────────
+     13. IMPACT SCREEN
+  ───────────────────────────────────────────── */
+  #si {
+    height: auto;
+    min-height: calc(100dvh - 48px);
+    overflow: visible;
+    padding: 5vw 4vw;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+  /* ipan panels: allow content to expand naturally */
+  .ipan {
+    overflow: visible;
+    flex: none;
+  }
+  /* Before/After grid: single column */
+  .bva-grid { grid-template-columns: 1fr; gap: 10px; }
+  /* Summary stat bar: 2-up wrap */
+  .bva-grid + div,
+  #si > .ipan > div[style*="grid-template-columns:repeat(4"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* ─────────────────────────────────────────────
+     14. ARCHITECTURE SCREEN
+  ───────────────────────────────────────────── */
+  #sarch {
+    height: auto;
+    min-height: calc(100dvh - 48px);
+    overflow: visible;
+    padding: 5vw 4vw;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+  /* Diagram area: allow natural height */
+  #sarch > div[style*="flex:1"] {
+    flex: none;
+    height: auto;
+    overflow: visible;
+  }
+  .sa-layer  { flex-wrap: wrap; }
+  .sa-tags   { max-width: 100%; justify-content: flex-start; margin-top: 8px; flex-wrap: wrap; }
+  .sa-main   { min-width: 0; }
+
+  /* ─────────────────────────────────────────────
+     15. ADMIN DASHBOARD
+  ───────────────────────────────────────────── */
+  #sa {
+    height: auto;
+    min-height: calc(100dvh - 48px);
+    overflow: visible;
+  }
+  .adhd {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 10px 4vw;
+    gap: 6px;
+  }
+  .adbody {
+    grid-template-columns: 1fr;
+    overflow: visible;
+    height: auto;
+    padding: 10px 4vw;
+    gap: 10px;
+  }
+  .adc { grid-column: span 1 !important; }
+
+  /* ─────────────────────────────────────────────
+     16. OVERLAYS — remain fixed over the page
+  ───────────────────────────────────────────── */
+  /* Timeout overlay: stays fixed regardless of scroll */
+  #tov    { position: fixed; }
+  .tobox  { max-width: min(90vw, 360px); padding: 24px 5vw; }
+
+  /* Audio popup: reposition to fit narrow screens */
+  #audio-popup {
+    right: 4vw;
+    left: 4vw;
+    max-width: none;
+    width: auto;
+  }
+
+  /* ─────────────────────────────────────────────
+     17. INLINE GRID OVERRIDES (style attributes)
+     Use !important to beat specificity of style=""
+  ───────────────────────────────────────────── */
+  /* Municipal step 3 review grid */
+  #sm3 .bill,
+  #sm2 .wfbody > div > div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Success screen 2-column stat row */
+  #se4 > .suc > div[style*="grid-template-columns:1fr 1fr"],
+  #sm4 > .suc > div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr 1fr !important; /* keep 2-up — they're small */
+  }
+
+}
 </style>
 </head>
 <body>
@@ -2534,7 +3014,7 @@ function audioSim(){
 
 // ── 12. ACCESSIBILITY ──────────────────────────────────────────
 function toggleHC(){ document.body.classList.toggle('hc'); document.getElementById('bhc').classList.toggle('on'); }
-function toggleLT(){ document.body.classList.toggle('lt2'); document.getElementById('blt').classList.toggle('on'); }
+function toggleLT(){ document.documentElement.classList.toggle('lt2'); document.getElementById('blt').classList.toggle('on'); }
 
 
 // ── 13. ACTIVITY TRACKING ──────────────────────────────────────
